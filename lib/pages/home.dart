@@ -1,5 +1,7 @@
-import 'package:AniClock/tempholder.dart';
+import 'package:AniClock/pages/tempholder.dart';
 import 'package:flutter/material.dart';
+
+import 'ViewSeasonOption.dart';
 
 class BaseHomePage extends StatefulWidget {
   const BaseHomePage({Key? key}) : super(key: key);
@@ -41,7 +43,7 @@ class _BaseHomePageState extends State<BaseHomePage> {
                 },
                 icon: const Icon(Icons.show_chart)),
           ),
-          Expanded(child: Text('')),
+          const Expanded(child: Text('')),
           Expanded(
             child: IconButton(
                 onPressed: () {
@@ -72,7 +74,12 @@ class _BaseHomePageState extends State<BaseHomePage> {
         title: const Text("AniClock"),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (BuildContext context) => ViewSeasonOptionPage()));
+        },
         child: const Icon(Icons.calendar_today_outlined),
       ),
 

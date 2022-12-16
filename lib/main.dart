@@ -1,4 +1,4 @@
-import 'package:AniClock/home.dart';
+import 'package:AniClock/pages/home.dart';
 import 'package:flutter/material.dart';
 
 void main() {
