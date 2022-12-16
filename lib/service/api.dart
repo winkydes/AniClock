@@ -34,7 +34,15 @@ class ApiService {
         "https://api.jikan.moe/v4/seasons/${DateTime.now().year}/$season?page=$pageNum";
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
-      return(json.decode(response.body));
+      return json.decode(response.body);
+    }
+  }
+
+  Future getAnimeById(int id) async {
+    String url = "https://api.jikan.moe/v4/anime/$id";
+    final response = await http.get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      return json.decode(response.body);
     }
   }
 }

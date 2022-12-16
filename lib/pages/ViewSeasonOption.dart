@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:AniClock/service/api.dart';
+import 'package:AniClock/widgets/AddCalendarSheet.dart';
 import 'package:flutter/material.dart';
 
 class ViewSeasonOptionPage extends StatefulWidget {
@@ -40,6 +41,7 @@ class _ViewSeasonOptionPageState extends State<ViewSeasonOptionPage> {
         List resList = value["data"];
         for (var element in resList) {
           Map<String, dynamic> anime = {
+            "id": element["mal_id"],
             "title": element["title"],
             "imageUrl": element["images"]["jpg"]["image_url"],
             "jpTitle": element["title_japanese"]
@@ -85,6 +87,15 @@ class _ViewSeasonOptionPageState extends State<ViewSeasonOptionPage> {
                               blurRadius: 15),
                         ]),
                     child: ListTile(
+                        onTap: () {
+                          showModalBottomSheet(
+                              context: context,
+                              isScrollControlled: true,
+                              backgroundColor: Colors.transparent,
+                              builder: (builder) {
+                                return AddCalendarSheet(animeId: displayAnime["id"],);
+                              });
+                        },
                         shape: RoundedRectangleBorder(
                           side: const BorderSide(color: Colors.black, width: 1),
                           borderRadius: BorderRadius.circular(20),
@@ -111,12 +122,16 @@ class _ViewSeasonOptionPageState extends State<ViewSeasonOptionPage> {
                                     Text(
                                       "${displayAnime["title"]}",
                                       textAlign: TextAlign.start,
-                                      style: TextStyle(color: Theme.of(context).primaryColor),
+                                      style: TextStyle(
+                                          color:
+                                              Theme.of(context).primaryColor),
                                     ),
                                     Text(
                                       "${displayAnime["jpTitle"]}",
                                       textAlign: TextAlign.start,
-                                      style: TextStyle(color: Theme.of(context).primaryColor),
+                                      style: TextStyle(
+                                          color:
+                                              Theme.of(context).primaryColor),
                                     )
                                   ],
                                 ),
