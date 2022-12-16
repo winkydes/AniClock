@@ -78,7 +78,7 @@ class _ViewSeasonOptionPageState extends State<ViewSeasonOptionPage> {
                           color: Colors.black,
                         ),
                         borderRadius: BorderRadius.circular(20),
-                        color: Colors.blueGrey[100],
+                        color: Theme.of(context).cardColor,
                         boxShadow: [
                           BoxShadow(
                               color: Colors.black.withOpacity(0.5),
@@ -89,7 +89,7 @@ class _ViewSeasonOptionPageState extends State<ViewSeasonOptionPage> {
                           side: const BorderSide(color: Colors.black, width: 1),
                           borderRadius: BorderRadius.circular(20),
                         ),
-                        tileColor: Colors.blueGrey[100],
+                        tileColor: Theme.of(context).hintColor,
                         contentPadding: const EdgeInsets.symmetric(
                             vertical: 10, horizontal: 20),
                         // trailing: const Text(
@@ -111,10 +111,12 @@ class _ViewSeasonOptionPageState extends State<ViewSeasonOptionPage> {
                                     Text(
                                       "${displayAnime["title"]}",
                                       textAlign: TextAlign.start,
+                                      style: TextStyle(color: Theme.of(context).primaryColor),
                                     ),
                                     Text(
                                       "${displayAnime["jpTitle"]}",
                                       textAlign: TextAlign.start,
+                                      style: TextStyle(color: Theme.of(context).primaryColor),
                                     )
                                   ],
                                 ),
