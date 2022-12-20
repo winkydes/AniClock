@@ -111,8 +111,12 @@ class _AddCalendarSheetState extends State<AddCalendarSheet> {
                                           ),
                                         ),
                                       ),
-                                      YoutubePlayer(
-                                          controller: _controller,
+                                      Padding(
+                                        padding: EdgeInsets.fromLTRB(
+                                            width * 0.08, 0, width * 0.08, 20),
+                                        child: YoutubePlayer(
+                                            controller: _controller,
+                                        ),
                                       ),
                                       Padding(
                                         padding: EdgeInsets.fromLTRB(

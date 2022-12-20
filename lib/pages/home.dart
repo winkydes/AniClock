@@ -2,6 +2,7 @@ import 'package:AniClock/pages/tempholder.dart';
 import 'package:flutter/material.dart';
 
 import 'ViewSeasonOption.dart';
+import 'account.dart';
 
 class BaseHomePage extends StatefulWidget {
   const BaseHomePage({Key? key}) : super(key: key);

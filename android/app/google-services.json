@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "384137530785",
+    "project_id": "aniclock",
+    "storage_bucket": "aniclock.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:384137530785:android:30014597247c95472d4fe0",
+        "android_client_info": {
+          "package_name": "com.example.AniClock"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "384137530785-10261chshj9g68l45lhr8avd4kdk38mr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwlMKv6DtwnAwFYgtF1k3TqpXdlP8vk7g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "384137530785-10261chshj9g68l45lhr8avd4kdk38mr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
