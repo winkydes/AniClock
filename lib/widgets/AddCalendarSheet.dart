@@ -2,6 +2,8 @@ import 'package:AniClock/service/api.dart';
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
+import '../pages/calandar.dart';
+
 class AddCalendarSheet extends StatefulWidget {
   final int animeId;
   const AddCalendarSheet({Key? key, required this.animeId}) : super(key: key);
@@ -84,8 +86,10 @@ class _AddCalendarSheetState extends State<AddCalendarSheet> {
                                                 ["jpg"]["image_url"])),
                                       ),
                                       Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 20),
+                                        padding: EdgeInsets.only(
+                                            bottom: height * 0.02,
+                                            left: width * 0.05,
+                                            right: width * 0.05),
                                         child: Align(
                                           alignment: Alignment.center,
                                           child: Text(
@@ -98,8 +102,10 @@ class _AddCalendarSheetState extends State<AddCalendarSheet> {
                                         ),
                                       ),
                                       Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 20),
+                                        padding: EdgeInsets.only(
+                                            bottom: height * 0.02,
+                                            left: width * 0.05,
+                                            right: width * 0.05),
                                         child: Align(
                                           alignment: Alignment.center,
                                           child: Text(
@@ -113,9 +119,23 @@ class _AddCalendarSheetState extends State<AddCalendarSheet> {
                                       ),
                                       Padding(
                                         padding: EdgeInsets.fromLTRB(
+                                            width * 0.05,
+                                            0,
+                                            width * 0.05,
+                                            height * 0.05),
+                                        child: Align(
+                                          alignment: Alignment.centerRight,
+                                          child: Text(
+                                            "Airing from ${data["aired"]["from"].toString().substring(0, 10)}\n every ${data["broadcast"]["string"]}",
+                                            textAlign: TextAlign.end,
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.fromLTRB(
                                             width * 0.08, 0, width * 0.08, 20),
                                         child: YoutubePlayer(
-                                            controller: _controller,
+                                          controller: _controller,
                                         ),
                                       ),
                                       Padding(
@@ -148,7 +168,13 @@ class _AddCalendarSheetState extends State<AddCalendarSheet> {
                               child: MaterialButton(
                                 color: Theme.of(context).bottomAppBarColor,
                                 child: const Text("Add to Calendar!"),
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: ((context) =>
+                                              CalendarPage(fromDate: DateTime.parse(data["aired"]["from"]), epNo: data["episodes"], title: data["title"],))));
+                                },
                               ),
                             ),
                           )
