@@ -20,18 +20,62 @@ class _LoginPageState extends State<LoginPage> {
     String password = passwordController.text;
     try {
       final userCredential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
-      print("Sign-in successful.");
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-              builder: (BuildContext buildContext) => const BaseHomePage()),
-          (route) => false);
+          .signInWithEmailAndPassword(email: email, password: password)
+          .then((value) {
+        print("Sign-in successful.");
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (BuildContext buildContext) => const BaseHomePage()),
+            (route) => false);
+      });
     } on FirebaseAuthException catch (e) {
+      print("rip");
       if (e.code == 'user-not-found') {
-        print('No user found for that email.');
+        showDialog(
+            context: context,
+            builder: (BuildContext buildContext) {
+              return AlertDialog(
+                title: const Text("No user found for that email"),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text("OK"))
+                ],
+              );
+            });
       } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
+        showDialog(
+            context: context,
+            builder: (BuildContext buildContext) {
+              return AlertDialog(
+                title: const Text("Wrong password provided for that user"),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text("OK"))
+                ],
+              );
+            });
+      } else {
+        showDialog(
+            context: context,
+            builder: (BuildContext buildContext) {
+              return AlertDialog(
+                title: Text(e.code),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text("OK"))
+                ],
+              );
+            });
       }
     }
   }

@@ -1,4 +1,6 @@
+import 'package:AniClock/pages/login.dart';
 import 'package:AniClock/service/api.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
@@ -7,7 +9,9 @@ import '../pages/calandar.dart';
 class AddCalendarSheet extends StatefulWidget {
   final int animeId;
   final bool thisSeason;
-  const AddCalendarSheet({Key? key, required this.animeId, required this.thisSeason}) : super(key: key);
+  const AddCalendarSheet(
+      {Key? key, required this.animeId, required this.thisSeason})
+      : super(key: key);
 
   @override
   State<AddCalendarSheet> createState() => _AddCalendarSheetState();
@@ -15,6 +19,7 @@ class AddCalendarSheet extends StatefulWidget {
 
 class _AddCalendarSheetState extends State<AddCalendarSheet> {
   ApiService api = ApiService();
+  bool logined = FirebaseAuth.instance.currentUser != null;
 
   @override
   Widget build(BuildContext context) {
@@ -168,17 +173,17 @@ class _AddCalendarSheetState extends State<AddCalendarSheet> {
                               padding: const EdgeInsets.all(10),
                               child: MaterialButton(
                                 color: Theme.of(context).bottomAppBarColor,
-                                child: const Text("Add to Calendar!"),
+                                child: logined? const Text("Add to Calendar!") : const Text("Login"),
                                 onPressed: () {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: ((context) => CalendarPage(
+                                          builder: ((context) => logined? CalendarPage(
                                                 fromDate: DateTime.parse(
                                                     data["aired"]["from"]),
                                                 epNo: data["episodes"],
                                                 title: data["title"],
-                                              ))));
+                                              ): const LoginPage())));
                                 },
                               ),
                             ),
