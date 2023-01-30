@@ -93,7 +93,7 @@ class _ViewSeasonOptionPageState extends State<ViewSeasonOptionPage> {
                               isScrollControlled: true,
                               backgroundColor: Colors.transparent,
                               builder: (builder) {
-                                return AddCalendarSheet(animeId: displayAnime["id"],);
+                                return AddCalendarSheet(animeId: displayAnime["id"], thisSeason: true,);
                               });
                         },
                         shape: RoundedRectangleBorder(

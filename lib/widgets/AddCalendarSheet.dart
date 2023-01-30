@@ -6,7 +6,8 @@ import '../pages/calandar.dart';
 
 class AddCalendarSheet extends StatefulWidget {
   final int animeId;
-  const AddCalendarSheet({Key? key, required this.animeId}) : super(key: key);
+  final bool thisSeason;
+  const AddCalendarSheet({Key? key, required this.animeId, required this.thisSeason}) : super(key: key);
 
   @override
   State<AddCalendarSheet> createState() => _AddCalendarSheetState();
@@ -172,8 +173,12 @@ class _AddCalendarSheetState extends State<AddCalendarSheet> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: ((context) =>
-                                              CalendarPage(fromDate: DateTime.parse(data["aired"]["from"]), epNo: data["episodes"], title: data["title"],))));
+                                          builder: ((context) => CalendarPage(
+                                                fromDate: DateTime.parse(
+                                                    data["aired"]["from"]),
+                                                epNo: data["episodes"],
+                                                title: data["title"],
+                                              ))));
                                 },
                               ),
                             ),
