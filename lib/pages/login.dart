@@ -19,6 +19,7 @@ class _LoginPageState extends State<LoginPage> {
     String email = emailController.text;
     String password = passwordController.text;
     try {
+      print("trying to login");
       final userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password)
           .then((value) {
@@ -28,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
             MaterialPageRoute(
                 builder: (BuildContext buildContext) => const BaseHomePage()),
             (route) => false);
-      });
+      }).timeout(const Duration(seconds: 10));
     } on FirebaseAuthException catch (e) {
       print("rip");
       if (e.code == 'user-not-found') {

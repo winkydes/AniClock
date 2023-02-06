@@ -1,30 +1,33 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+var db = FirebaseFirestore.instance;
 
 class CalendarPage extends StatefulWidget {
   final DateTime fromDate;
   final int? epNo;
   final String title;
+  final int animeId;
   const CalendarPage(
       {Key? key,
       required this.fromDate,
       required this.epNo,
-      required this.title})
+      required this.title,
+      required this.animeId})
       : super(key: key);
   @override
   State<CalendarPage> createState() => _CalendarPageState();
 }
 
 class _CalendarPageState extends State<CalendarPage> {
-  DateTime _selectedDay = DateTime.now();
-  DateTime _focusedDay = DateTime.now();
   CalendarFormat _calendarFormat = CalendarFormat.month;
-  List<DateTime> _selectedDayList = [];
+  final List<DateTime> _selectedDayList = [];
 
   @override
   void initState() {
     setState(() {
-      _selectedDay = widget.fromDate;
       for (int i = 0; i < (widget.epNo ?? 12); i++) {
         _selectedDayList.add(widget.fromDate.add(Duration(days: i * 7)));
       }
@@ -40,19 +43,34 @@ class _CalendarPageState extends State<CalendarPage> {
       ),
       bottomNavigationBar: BottomAppBar(
           child: Padding(
-            padding: const EdgeInsets.all(10),
-            child: Container(
-              decoration: BoxDecoration(color: Theme.of(context).primaryColor),
-              child: TextButton(
-                onPressed: () {},
-                child: const Text("Confirm!", style: TextStyle(color: Colors.white),),
-              ),
+        padding: const EdgeInsets.all(10),
+        child: Container(
+          decoration: BoxDecoration(color: Theme.of(context).primaryColor),
+          child: TextButton(
+            onPressed: () {
+              final registration = <String, dynamic>{
+                "uid": FirebaseAuth.instance.currentUser!.uid,
+                "animeId": widget.animeId
+              };
+              db
+                  .collection("registration")
+                  .doc(FirebaseAuth.instance.currentUser!.uid)
+                  .update({
+                "animeId": FieldValue.arrayUnion([widget.animeId])
+              });
+              Navigator.of(context).pop();
+              Navigator.of(context).pop();
+            },
+            child: const Text(
+              "Confirm!",
+              style: TextStyle(color: Colors.white),
             ),
-          )),
+          ),
+        ),
+      )),
       body: Padding(
         padding: const EdgeInsets.all(10),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+        child: ListView(
           children: [
             Padding(
               padding: const EdgeInsets.all(10),
@@ -71,7 +89,6 @@ class _CalendarPageState extends State<CalendarPage> {
               lastDay:
                   widget.fromDate.add(Duration(days: (widget.epNo ?? 12) * 7)),
               onPageChanged: (focusedDay) {
-                _focusedDay = focusedDay;
               },
               calendarFormat: _calendarFormat,
               onFormatChanged: (format) {

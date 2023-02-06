@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "384137530785-l57a6tn94377fv2o9jf8glsceh7dmlkt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.AniClock",
+            "certificate_hash": "57d8138a0d78bb9de913c60d45389b6ab1618ecc"
+          }
+        },
+        {
           "client_id": "384137530785-10261chshj9g68l45lhr8avd4kdk38mr.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,6 +37,13 @@
             {
               "client_id": "384137530785-10261chshj9g68l45lhr8avd4kdk38mr.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "384137530785-ua12gsdsh965j4ahqdkni091t0ptpggv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.myProjectName"
+              }
             }
           ]
         }

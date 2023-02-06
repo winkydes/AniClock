@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'ViewSeasonOption.dart';
 import 'account.dart';
 import 'landing.dart';
+import 'schedule.dart';
 
 class BaseHomePage extends StatefulWidget {
   const BaseHomePage({Key? key}) : super(key: key);
@@ -18,7 +19,7 @@ class _BaseHomePageState extends State<BaseHomePage> {
   var widgetOptions = [
     const HomePage(),
     const InfoPage(),
-    const ResourcePage(),
+    const SchedulePage(),
     const AccountPage(),
   ];
 

@@ -183,6 +183,7 @@ class _AddCalendarSheetState extends State<AddCalendarSheet> {
                                                     data["aired"]["from"]),
                                                 epNo: data["episodes"],
                                                 title: data["title"],
+                                                animeId: widget.animeId
                                               ): const LoginPage())));
                                 },
                               ),
