@@ -79,7 +79,51 @@ class _HomePageState extends State<HomePage> {
                         }));
                   }
                 })),
-                
+        SizedBox(
+            height: height * 0.3,
+            child: FutureBuilder<dynamic>(
+                future: api.getReccomendations(0),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return Container(
+                      decoration: BoxDecoration(
+                          color: Theme.of(context).backgroundColor,
+                          borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(25),
+                              topRight: Radius.circular(25))),
+                      height: height * 0.75,
+                      child: const Center(child: CircularProgressIndicator()),
+                    );
+                  } else {
+                    return ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: snapshot.data["data"].length,
+                        itemBuilder: ((context, index) {
+                          return Padding(
+                            padding: EdgeInsets.fromLTRB(
+                                width * 0.03, 0, width * 0.03, height * 0.02),
+                            child: GestureDetector(
+                              onTap: () {
+                                showModalBottomSheet(
+                                    context: context,
+                                    isScrollControlled: true,
+                                    backgroundColor: Colors.transparent,
+                                    builder: (builder) {
+                                      return AddCalendarSheet(
+                                        animeId: snapshot.data["data"]
+                                            .elementAt(index)["mal_id"],
+                                        thisSeason: true,
+                                      );
+                                    });
+                              },
+                              child: Image.network(snapshot.data["data"]
+                                      .elementAt(index)["images"]["jpg"]
+                                  ["image_url"]),
+                            ),
+                          );
+                        }));
+                  }
+                })),   
       ],
     ));
   }

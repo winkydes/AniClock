@@ -45,4 +45,12 @@ class ApiService {
       return json.decode(response.body);
     }
   }
+
+  Future getReccomendations(int pageNum) async {
+    String url = "https://api.jikan.moe/v4/recommendations/anime?page=$pageNum";
+    final response = await http.get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      return json.decode(response.body);
+    }
+  }
 }
